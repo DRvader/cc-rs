@@ -663,6 +663,11 @@ impl Build {
         self
     }
 
+    /// Get files which will be compiled
+    pub fn get_files(&self) -> &[Arc<Path>] {
+        self.files.as_slice()
+    }
+
     /// Set C++ support.
     ///
     /// The other `cpp_*` options will only become active if this is set to
