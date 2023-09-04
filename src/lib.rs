@@ -481,6 +481,15 @@ impl Build {
         Ok(src)
     }
 
+    /// Resets the cached pre-computed compiler inputs.
+    /// This is intended to be used when switching between compilers that support different flags.
+    /// i.e. clang++ to cl.exe
+    pub fn reset_cache(&mut self) {
+        self.known_flag_support_status = Arc::new(Mutex::new(HashMap::new()));
+        self.env_cache = Arc::new(Mutex::new(HashMap::new()));
+        self.apple_sdk_root_cache = Arc::new(Mutex::new(HashMap::new()));
+    }
+
     /// Run the compiler to test if it accepts the given flag.
     ///
     /// For a convenience method for setting flags conditionally,
